@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+    
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width"> 
+        <title>Probador</title>
+    </head>
+
+    <body>
+        
+        <main>
+
+            <input id="text" type="text">
+            <button id="captura">captura</button>
+            <button id="copiar">copiar</button>
+        
+        </main>
+        
+        <footer>
+            <p class="copyright">&copy Copyright David Cortes Curso Alura - 2022</p>
+        </footer>   
+    
+    </body>
+
+</html>
+
+<script>
+	
+    function captura() {
+
+        texto = document.querySelector('#text').value;
+        console.log(texto);
+        return texto
+
+    }
+
+    function copy(){
+            
+        navigator.clipboard.writeText(captura());
+    
+    }
+
+        var button1 = document.querySelector('#captura');
+        button1.onclick = captura;
+        var button2 = document.querySelector('#copiar');
+        button2.onclick = copy;
+
+</script>

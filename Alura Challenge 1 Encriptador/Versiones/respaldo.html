@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="es">
+    
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width"> 
+        <title>Encriptador de Texto</title>
+        <link rel="stylesheet" href="reset.css">
+        <link rel="stylesheet" href="style.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Outfit:wght@900&display=swap" rel="stylesheet">
+    </head>
+
+    <body>
+        
+        <main>
+        
+            <section>
+
+                <img class="logo-principal" src="imagenes/Logo.png">
+                <p>euforia eufonia eubolia</p>
+
+                <!-- <label for="mensaje">Mensaje</label> -->
+                <textarea cols="70" rows="10" id="mensaje" class="input-message" required placeholder="Ingrese el texto aqui"></textarea>
+                
+                <div class="box-buttons">
+                    <button id="en-button" class="encriptar-button">Encriptar</button>
+                    <button id="des-button" class="desencriptar-button">Desencriptar</button>
+                </div>
+
+            </section>
+
+            <section class="rectangle-message">
+
+                <img class="muneco" src="imagenes/Muñeco.png">
+                <p class="alert-no-message">Ningún mensaje fue encontrado</p>
+                <p class="text-no-message">Ingresa el texto que desees encriptar o desencriptar.</p>
+                <p class="text-message"></p>
+
+            </section>
+        
+        </main>
+        
+        <footer>
+            <p class="copyright">&copy Copyright David Cortes Curso Alura - 2022</p>
+        </footer>   
+    
+    </body>
+
+</html>
+
+<script>
+        
+        
+    function validar()
+    {
+
+    var textoi = document.querySelector(".input-message").value;
+    
+    // En esta parte de aquí encontre la funcion replace que cambia un valor, por otro dentro de una string en esta ocacion el espacio vacio es idicado con / /, y lo remplazamos por nada con ''
+    var texto = (textoi.replace(/ /g,''));
+    console.log(texto);
+
+    for ( var i = 0; i < texto.length; i++ ) {
+        vocal=texto.charAt(i);
+        vocalm=texto.charAt(i).toUpperCase();
+        console.log(vocalm);
+        if (vocal===vocalm){
+            const errormayus = document.querySelector('.text-no-message');
+            errormayus.textContent = "Tu mensaje contiene mayusculas, por favor corrigelo";
+            
+            document.querySelector('.muneco').style.visibility="visible";
+            document.querySelector('.alert-no-message').style.visibility="visible";
+            document.querySelector('.text-no-message').style.visibility="visible";
+            document.querySelector('.text-message').style.visibility="hidden";
+            break;
+        }
+        else{
+            if(i===texto.length-1){
+                findspecialcharacters();
+                break;
+                }
+            }
+        }
+    }
+    
+    
+    function findspecialcharacters()
+    {
+    characters = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
+    var textoi = document.querySelector(".input-message").value;
+    // En esta parte de aquí encontre la funcion replace que cambia un valor, por otro dentro de una string en esta ocacion el espacio vacio es idicado con / /, y lo remplazamos por nada con ''
+    var texto = (textoi.replace(/ /g,''));
+
+    for ( var i = 0; i < texto.length; i++ ) {
+        vocal=texto.charAt(i);
+        
+        if (vocal === characters[i]){
+            if(i===texto.length-1){
+                encriptar();
+                break;
+                }
+            else{
+                const errormayus = document.querySelector('.text-no-message');
+                errormayus.textContent = "Tu mensaje contiene un caracter especial, por favor eliminalo";
+                
+                document.querySelector('.muneco').style.visibility="visible";
+                document.querySelector('.alert-no-message').style.visibility="visible";
+                document.querySelector('.text-no-message').style.visibility="visible";
+                document.querySelector('.text-message').style.visibility="hidden";
+                break;
+                }
+            }
+        }
+    }
+
+
+    // [ai,enter,imes,ober,ufat];
+    // var codigos = [a,e,i,o,u];
+
+    function encriptar()
+    {
+        var message = [];
+        var texto = document.querySelector(".input-message").value;
+            for ( var i = 0; i < texto.length; i++ ) {
+                vocal=texto.charAt(i);
+                
+                if (vocal=="a"){
+                    vocal="ai";
+                    message.push(vocal);
+                }
+                else{
+                    if (vocal=="e"){
+                        vocal="enter";
+                        message.push(vocal);
+                    }
+                    else{
+                        if (vocal=="i"){
+                            vocal="imes";
+                            message.push(vocal);
+                        }
+                        else{
+                            if (vocal=="o"){
+                                vocal="ober";
+                                message.push(vocal);
+                            }
+                            else{
+                                if (vocal=="u"){
+                                    vocal="ufat";
+                                    message.push(vocal);
+                                }
+                                else{
+                                    message.push(vocal);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            
+        if (texto.length!=0){
+         var textoencriptado=message.join("");
+         console.log(textoencriptado);
+         const parrafo = document.querySelector('.text-message');
+         parrafo.textContent = textoencriptado;
+            
+         document.querySelector('.muneco').style.visibility="hidden";
+         document.querySelector('.alert-no-message').style.visibility="hidden";
+         document.querySelector('.text-no-message').style.visibility="hidden";
+         document.querySelector('.text-message').style.visibility="visible";
+        
+        }
+        
+        else
+        
+            {
+         document.querySelector('.muneco').style.visibility="visible";
+         document.querySelector('.alert-no-message').style.visibility="visible";
+         document.querySelector('.text-no-message').style.visibility="visible";
+         document.querySelector('.text-message').style.visibility="hidden";
+        }       
+    }
+
+        var button1 = document.querySelector(".encriptar-button");
+        button1.onclick = validar;
+
+</script>
